@@ -15,7 +15,11 @@ a username and password combination.
 
 The username/password combinations are configured directly to the auth
 backend using the `users/` path. This backend cannot read usernames and
-passwords from an external source.
+passwords from an external source but it can accept pre-hashed passwords
+as input.
+
+The backend lowercases all submitted usernames, e.g. `Mary` and `mary` are the
+same entry.
 
 ## Authentication
 
@@ -125,8 +129,18 @@ necessary.
     <ul>
       <li>
         <span class="param">password</span>
-        <span class="param-flags">required</span>
-            Password for this user.
+        <span class="param-flags">required unless `password_hash` is set</span>
+            Password for this user. Mutually exclusive with `password_hash`.
+      </li>
+    </ul>
+  </dd>
+  <dd>
+    <ul>
+      <li>
+        <span class="param">password_hash</span>
+        <span class="param-flags">required unless `password` is set</span>
+            Pre-hashed version of this user's password in bcrypt's format.
+            Mutually exclusive with `password`.
       </li>
     </ul>
   </dd>
@@ -258,8 +272,18 @@ necessary.
     <ul>
       <li>
         <span class="param">password</span>
-        <span class="param-flags">required</span>
-            Password for this user.
+        <span class="param-flags">required unless `password_hash` is set</span>
+            Password for this user. Mutually exclusive with `password_hash`.
+      </li>
+    </ul>
+  </dd>
+  <dd>
+    <ul>
+      <li>
+        <span class="param">password_hash</span>
+        <span class="param-flags">required unless `password` is set</span>
+            Pre-hashed version of this user's password in bcrypt's format.
+            Mutually exclusive with `password`.
       </li>
     </ul>
   </dd>
